@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PackageLicenseFile>mit-license.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.5.2" />
+    <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="1.5.2" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.5.1" />
+    <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="1.5.2" />
+    <PackageReference Include="OpenCvSharp4" Version="4.5.1.20201229" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.1.20201229" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MlNetOnnxAlpr.OnnxObjectDetection\MLNetOnnxAlpr.OnnxObjectDetection.csproj" />
+    <ProjectReference Include="..\MlNetOnnxAlpr.OpenAlprClient\MlNetOnnxAlpr.OpenAlprClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_CopyItems Include="$(SolutionDir)\MlNetOnnxAlpr.OpenAlprClient\Dependencies\**\*.*">
+      <InProject>false</InProject>
+    </_CopyItems>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\mit-license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="@(_CopyItems)" DestinationFiles="@(_CopyItems->'$(OutDir)\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
+  </Target>
+</Project>

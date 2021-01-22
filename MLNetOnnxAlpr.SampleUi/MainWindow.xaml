@@ -1,0 +1,16 @@
+﻿<Window x:Class="MLNetOnnxAlpr.SampleUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MLNetOnnxAlpr.SampleUi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Image x:Name="VideoImage" Grid.Row="0" />
+        <Canvas x:Name="VideoCanvas" Grid.Row="0" Width="{Binding Path=ActualWidth, ElementName=VideoImage}" />
+    </Grid>
+</Window>
